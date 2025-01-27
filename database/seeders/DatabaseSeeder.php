@@ -3,7 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
+use Database\Seeders\User\UsersSeeder;
+use Database\Seeders\Category\SubCategorySeeder;
+use Database\Seeders\Category\MainCategoriesSeeder;
+use Database\Seeders\Category\MainCategorySubcategorySeeder;
+use Database\Seeders\Photo\PhotoSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+        //  PhotoSeeder::class,    
+         UsersSeeder::class,
+         MainCategoriesSeeder::class,
+         SubCategorySeeder::class,
+         MainCategorySubcategorySeeder::class,
+         
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        ]);
     }
 }

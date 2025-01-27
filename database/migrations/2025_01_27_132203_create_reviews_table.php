@@ -16,8 +16,7 @@ return new class extends Migration
             $table->enum('rating', [1,2,3,4,5]);
             $table->text('comment');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->unsignedBigInteger('reviewable_id');
-            $table->string('reviewable_type');
+            $table->morphs('reviewable');
             $table->timestamps();
             $table->softDeletes();
         });
