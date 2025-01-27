@@ -19,7 +19,7 @@ class ReviewSeeder extends Seeder
             [
                 'rating' => 5,
                 'comment' => 'Great product! High quality and excellent service.',
-                'user_id' => 1,
+                'user_id' => 4,
                 'reviewable_id' => 1,
                 'reviewable_type' => Product::class,
 
@@ -43,7 +43,7 @@ class ReviewSeeder extends Seeder
             [
                 'rating' => 5,
                 'comment' => ' The package was very useful, but some details could be improved.',
-                'user_id' => 1,
+                'user_id' => 5,
                 'reviewable_id' => 2,
                 'reviewable_type' => Bundle::class,
 
@@ -51,7 +51,7 @@ class ReviewSeeder extends Seeder
             [
                 'rating' => 2,
                 'comment' => 'The product was not as I expected, it needs to be improved.',
-                'user_id' => 2,
+                'user_id' =>6,
                 'reviewable_id' => 3,
                 'reviewable_type' => Product::class,
 

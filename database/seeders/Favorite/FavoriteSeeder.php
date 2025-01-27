@@ -17,7 +17,17 @@ class FavoriteSeeder extends Seeder
     {
         $favorites = [ 
             [
-                'user_id' => 1,
+                'user_id' => 2,
+                'favorable_type' => Product::class,
+                'favorable_id' => 1
+            ],
+            [
+                'user_id' => 3,
+                'favorable_type' => Bundle::class,
+                'favorable_id' => 2
+            ],
+            [
+                'user_id' => 4,
                 'favorable_type' => Product::class,
                 'favorable_id' => 1
             ],
@@ -25,6 +35,16 @@ class FavoriteSeeder extends Seeder
                 'user_id' => 2,
                 'favorable_type' => Bundle::class,
                 'favorable_id' => 2
+            ],
+            [
+                'user_id' => 3,
+                'favorable_type' => Product::class,
+                'favorable_id' => 1
+            ],
+            [
+                'user_id' => 3,
+                'favorable_type' => Bundle::class,
+                'favorable_id' => 3
             ],
         ];
 
