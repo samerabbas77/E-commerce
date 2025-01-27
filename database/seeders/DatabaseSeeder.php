@@ -8,13 +8,15 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\User\UsersSeeder;
 use Database\Seeders\Order\OrderSeeder;
 use Database\Seeders\Photo\PhotoSeeder;
+use Database\Seeders\Bundle\BundleSeeder;
+use Database\Seeders\Refund\RefundSeeder;
 use Database\Seeders\Review\ReviewSeeder;
 use Database\Seeders\Address\AddressSeeder;
-use Database\Seeders\Bundle\BundleProductSeeder;
-use Database\Seeders\Bundle\BundleSeeder;
 use Database\Seeders\Product\ProductSeeder;
 use Database\Seeders\Favorite\FavoriteSeeder;
+use Database\Seeders\Refund\RefundItemSeeder;
 use Database\Seeders\Order\OrderProductSeeder;
+use Database\Seeders\Bundle\BundleProductSeeder;
 use Database\Seeders\Category\SubCategorySeeder;
 use Database\Seeders\Category\MainCategoriesSeeder;
 use Database\Seeders\Category\MainCategorySubcategorySeeder;
@@ -40,6 +42,8 @@ class DatabaseSeeder extends Seeder
          OrderProductSeeder::class,
          BundleSeeder::class,
          BundleProductSeeder::class,
+         RefundSeeder::class,
+         RefundItemSeeder::class,
 
         ]);
     }

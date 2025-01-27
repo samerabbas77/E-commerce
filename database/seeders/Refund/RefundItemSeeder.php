@@ -2,8 +2,10 @@
 
 namespace Database\Seeders\Refund;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Refund\RefundItem;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RefundItemSeeder extends Seeder
 {
@@ -12,6 +14,45 @@ class RefundItemSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $refundItems = [
+            [
+                'refund_id' => 1, // يجب أن يكون معرف الاسترجاع موجودًا في جدول refunds
+                'product_id' => 1, // يجب أن يكون معرف المنتج موجودًا في جدول products
+                'quantity' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'refund_id' => 2,
+                'product_id' => 2,
+                'quantity' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'refund_id' => 3,
+                'product_id' => 3,
+                'quantity' => 3,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'refund_id' => 4,
+                'product_id' => 4,
+                'quantity' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'refund_id' => 5,
+                'product_id' => 5,
+                'quantity' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
+        ];
+
+        foreach ($refundItems as $item) {
+            RefundItem::create($item);        }
     }
-}
+}   
