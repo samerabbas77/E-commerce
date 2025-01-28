@@ -2,8 +2,10 @@
 
 namespace Database\Seeders\Cart;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Carbon\Carbon;
+use App\Models\Cart\Cart;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CartSeeder extends Seeder
 {
@@ -12,6 +14,26 @@ class CartSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $carts = [
+            [
+                'user_id' => 4,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'user_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'user_id' => 3,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+        ];
+
+        foreach ($carts as $cart) {
+            Cart::create($cart);
+        }
     }
 }
