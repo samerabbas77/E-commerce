@@ -15,9 +15,9 @@ class BundleProductSeeder extends Seeder
     {
         $bundleProducts = [
             [
-                'bundle_id' => 1, // معرف الـ Bundle
-                'product_id' => 1, // معرف المنتج
-                'quantity' => 3    // الكمية
+                'bundle_id' => 1,
+                'product_id' => 1, 
+                'quantity' => 3    
             ],
             [
                 'bundle_id' => 1,
