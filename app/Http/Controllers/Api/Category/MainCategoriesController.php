@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Category;
 
 use Illuminate\Http\Request;
-use App\Models\Category\main_categories;
+use App\Models\Category\MainCategory;
 use App\Http\Controllers\Controller;
 
 class MainCategoriesController extends Controller
@@ -35,7 +35,7 @@ class MainCategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(main_categories $main_categories)
+    public function show(MainCategory $MainCategory)
     {
         //
     }
@@ -43,7 +43,7 @@ class MainCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(main_categories $main_categories)
+    public function edit(MainCategory $MainCategory)
     {
         //
     }
@@ -51,7 +51,7 @@ class MainCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, main_categories $main_categories)
+    public function update(Request $request, MainCategory $MainCategory)
     {
         //
     }
@@ -59,7 +59,7 @@ class MainCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(main_categories $main_categories)
+    public function destroy(MainCategory $MainCategory)
     {
         //
     }

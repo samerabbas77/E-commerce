@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('coupon_id')->constrained('coupons')->onDelete('cascade');
             $table->integer('discount_amount');
             $table->dateTime('applied_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
