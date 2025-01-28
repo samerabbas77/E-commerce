@@ -16,8 +16,8 @@ class RefundItemSeeder extends Seeder
     {
         $refundItems = [
             [
-                'refund_id' => 1, // يجب أن يكون معرف الاسترجاع موجودًا في جدول refunds
-                'product_id' => 1, // يجب أن يكون معرف المنتج موجودًا في جدول products
+                'refund_id' => 1, 
+                'product_id' => 1, 
                 'quantity' => 2,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
