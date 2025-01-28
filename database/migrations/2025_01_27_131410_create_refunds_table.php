@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('notes');
             $table->enum('refund_type', ['full', 'partial']);
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
