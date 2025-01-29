@@ -3,6 +3,7 @@
 namespace Database\Seeders\Category;
 
 use App\Models\Category\main_categories;
+use App\Models\Category\MainCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,7 +23,7 @@ class MainCategoriesSeeder extends Seeder
         ];
 
         foreach ($mainCategories as $mainCategorie) {
-            main_categories::create($mainCategorie);
+            MainCategory::create($mainCategorie);
         }
     }
 }
