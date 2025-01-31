@@ -8,7 +8,7 @@ use App\Models\Order\Order;
 use App\Models\Photo\Photo;
 use App\Models\Review\Review;
 use App\Models\Favorite\Favorite;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
