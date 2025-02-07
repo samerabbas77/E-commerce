@@ -24,6 +24,8 @@ use Database\Seeders\Category\MainCategoriesSeeder;
 use Database\Seeders\Category\MainCategorySubcategorySeeder;
 use Database\Seeders\Coupon\CouponOrderSeeder;
 use Database\Seeders\Coupon\CouponSeeder;
+use Database\Seeders\Role\PermissionSeeder;
+use Spatie\Permission\Contracts\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -52,8 +54,8 @@ class DatabaseSeeder extends Seeder
          CartSeeder::class,
          CartItemSeeder::class,
          CouponSeeder::class,
-         CouponOrderSeeder::class
-
+         CouponOrderSeeder::class,
+         PermissionSeeder::class,
         ]);
     }
 }
