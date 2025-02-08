@@ -2,8 +2,12 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Database\QueryException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -44,5 +48,41 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+
+        if ($exception instanceof QueryException) {
+            return response()->json(['message' => 'Database Error'], 500);
+        }
+
+         if ($exception instanceof ModelNotFoundException) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Resource not found',
+            ], 404);
+        }
+
+
+        if ($exception instanceof AuthorizationException) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized action',
+            ], 403);
+        }
+
+
+        if ($exception instanceof ValidationException) {
+            return response()->json([
+                'status' => false,
+                'errors' => $exception->errors(),
+                'message' => 'Validation failed',
+            ], 422);
+        }
+
+
+    
+        
     }
 }
