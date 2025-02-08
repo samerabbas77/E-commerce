@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('is_male');
             $table->date('birthdate');
             $table->string('telegram_user_id')->nullable();
-            $table->string('role');
+            $table->string('role')->default('customer');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
