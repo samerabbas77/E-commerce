@@ -81,7 +81,8 @@ class Handler extends ExceptionHandler
             ], 422);
         }
 
-
+        //...................................
+        return response()->json(['message' => 'something went wronge : '.$exception->getMessage()], 404);
     
         
     }

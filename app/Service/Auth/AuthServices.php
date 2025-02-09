@@ -59,9 +59,13 @@ class AuthServices
       //................................................................................
 
       /**
-       *  login a user
+       * login a user
+       * we create a access token and refresh token
+       * access token expire in short time
+       * refresh usee to expand the acess token 
+       * and it expire in long time
        * @param array $data
-       * @return array{authorisation: array{token: string, type: string, role: TFirstDefault|TValue, user: mixed}|mixed|\Illuminate\Http\JsonResponse}
+       * @return array{authorisation: array{access_token: mixed, expires_in: mixed, refresh_token: mixed, token_type: string, role: TFirstDefault|TValue, user: mixed}|mixed|\Illuminate\Http\JsonResponse}
        */
       public function login(array $data)
       {
@@ -74,13 +78,13 @@ class AuthServices
       
           // Generate Passport token
           $token = $user->createToken('API Token')->accessToken;
-      
+          dd($token);
           return [
               'user' => $user->name,
               'role' => $user->getRoleNames()->first(),
               'authorisation' => [
-                  'token' => $token,
-                  'type' => 'Bearer',
+                  'token_type' => 'Bearer',
+                  'access_token' => $token // Expiry time
               ],
           ];
       }
@@ -88,6 +92,5 @@ class AuthServices
       //......................................................
       //......................................................
 
-      
   
 }

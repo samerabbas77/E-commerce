@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Favorite;
+namespace App\Http\Controllers\Api\Photo;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

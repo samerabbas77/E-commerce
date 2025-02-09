@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
@@ -43,7 +44,7 @@ class RegisterRequest extends FormRequest
             'first_name'     => ['required', 'string', 'max:35'],
             'last_name'      => ['required', 'string', 'max:35'],
             'email'          => ['required', 'email', 'unique:users,email'],
-            'password'       => ['required', 'string', 'confirmed', 'min:8', 'max:16', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/'], // Enforce complexity
+            'password'       => ['required', 'confirmed', 'max:16', Password::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised()], // Enforce complexity
             'phone'          => ['required', 'unique:users,phone', 'string', 'max:25', 'regex:/^\+?[0-9]{10,15}$/'], // Validate phone number format
             'address'        => ['required', 'string', 'max:255'],
             'is_male'        => ['required', 'boolean'],
