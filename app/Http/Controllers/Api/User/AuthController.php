@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\User;
 
 
 use Illuminate\Http\Request;
-use App\Service\Auth\AuthServices;
+use App\Service\Api\User\AuthServices;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\LoginRequest;
@@ -62,32 +62,77 @@ public function register(RegisterRequest $request)
     */
     public function info()
     {
-         return response()->json(auth()->user());
+      $info = $this->authService->info();
+      return $this->success($info, 'Get User Info Successfully', 200);
     }
 
     //.......................................
     //........................................
     /**
-     * Log the user out (Invalidate the token).
-    *
-    * @return \Illuminate\Http\JsonResponse
-    */
-    public function logout(Request $request)
+     *  Log the user out (Invalidate the token).
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
+    public function logout()
     {
-        $user = auth('api')->user();
+     // Revoke the current access token
+      auth('api')->logout();
     
-        if ($user) {
-            // Revoke the current access token
-            $request->user()->token()->revoke();
-    
-            return response()->json(['message' => 'Successfully logged out']);
-        }
-    
-        return response()->json(['message' => 'User not found'], 404);
+      return response()->json(['message' => 'Successfully logged out']);    
     }
 
     //...............................
-   
+    /**
+     * refresh the token
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+      return response()->json([
+        'access_token' => Auth::refresh(),
+        'token_type' => 'bearer',
+        'expires_in' => Auth::factory()->getTTL() * 60
+        ]);
+    }
+
+    //..........................................OAth Authentiction................................................
+    //...................................................................................................
+        /**
+     * Redirect to the OAuth provider for login 
+     * (if the procees is currect it will direct you to google or facebook or linkedin)
+     * depende on what provider you sit in the request
+     *
+     * @param string $provider
+     * @return mixed
+     * @throws \Exception
+     */
+    public function redirectToProvider(string $provider): mixed
+    {
+        $data =  $this->authService->redirectToProvider($provider);
+        if($data == null)
+        {
+          return $this->error('Invalid provider', 422);
+        }
+        return $data;
+    }
+    //...................................
+    //..................................
+
+    /**
+     * Handle the callback from the OAuth provider
+     *
+     * @param string $provider
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function handleProviderCallback(string $provider)
+    {
+        $data = $this->authService->handleProviderCallback($provider);
+        if($data == null){
+          return 
+          $this->error('Invalid provider', 422);
+        }
+        return $this->success($data,'User login successfully', 200);
+    }
 
 
 }

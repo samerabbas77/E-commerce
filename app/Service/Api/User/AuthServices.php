@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Api\Auth;
+namespace App\Service\Api\User;
 
 use Exception;
 use App\Models\Cart\Cart;
@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use App\Service\Api\Photo\PhotoService;
-use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthServices
 {
@@ -55,13 +56,16 @@ class AuthServices
           DB::beginTransaction();
           try {
               $user = $this->createUser($data);
+              DB::commit();
               Cart::create(['user_id' => $user->id]);
               if (isset($data['avatar'])) {
                 // $result = $this->photoService->storePhoto($data['avatar'], $user, 'avatars');
+                // dispatch(new ProcessUserAvatar($user, $data['avatar']));
+
             } else {
                 // $this->photoService->addDefaultAvatar($user);
             }
-              DB::commit();
+              
               return $user;
           } catch (Exception $e) {
               DB::rollBack();
@@ -74,26 +78,28 @@ class AuthServices
       //................................................................................
 
       /**
-       * login a user
+       *       * login a user
        * we create a access token and refresh token
        * access token expire in short time
        * refresh usee to expand the acess token 
        * and it expire in long time
        * @param array $data
-       * @return array{authorisation: array{access_token: mixed, expires_in: mixed, refresh_token: mixed, token_type: string, role: TFirstDefault|TValue, user: mixed}|mixed|\Illuminate\Http\JsonResponse}
+       * @throws \Exception
+       * @return array{authorisation: array{access_token: bool, token_type: string, role: mixed, user: string}|bool}
        */
       public function login(array $data)
       {
         try{
+          
           // Validate user credentials
           $user = User::where('email', $data['email'])->first();
        
           $credentials = request(['email', 'password']);
-
+         
           if (! $token = auth('api')->attempt($credentials)) {
-              return response()->json(['error' => 'Unauthorized'], 401);
+              return [];
           }
-        
+         
           return [
               'user' => $user->first_name.' '.$user->last_name,
               'role' => $user->role,
@@ -112,6 +118,84 @@ class AuthServices
       //.........................
       //.........................
 
+      public function info()
+      {
+        $gender = auth('api')->user()->is_male ? 'male' : 'female';
+        return [
+            'first_name' => auth('api')->user()->first_name,
+            'last_name' => auth('api')->user()->last_name,
+            'email' => auth('api')->user()->email,
+            'Gender' => $gender
+        ];
+      }
+      //........................................Aoth Auentication................................
+      //.........................................................................................
+          /**
+     * Redirect the user to the OAuth provider.
+     *
+     * @param string $provider
+     * @return mixed
+     * @throws \Exception
+     */
+    public function redirectToProvider(string $provider)
+    {
+        if (!in_array($provider, ['google', 'facebook', 'linkedin'])) {
+            return null;
+        }
+        return Socialite::driver($provider)->stateless()->redirect();  }
+
+
+      /**
+       * Handle the OAuth provider callback and authenticate the user.
+       * @param string $provider
+       * @return mixed|\Illuminate\Http\JsonResponse
+       * @method static \Laravel\Socialite\Contracts\Provider driver(string $driver)
+       */
+      public function handleProviderCallback(string $provider)
+    {
+        if (!in_array($provider, ['google', 'facebook', 'linkedin'])) {
+            return null;
+        }
+
+        try {
+          $socialUser = Socialite::driver($provider)->stateless()->user();
+          
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Invalid credentials provided'], 422);
+        }
+        
+        $name = explode(' ', $socialUser->name);
+       
+        $user = DB::transaction(function () use ($socialUser, $provider,$name) {
+            $user = User::firstOrCreate(
+                ['email' => $socialUser->getEmail()],
+                [
+                    'first_name' => $name[0] ?? null,
+                    'last_name' => $name[1] ?? null,
+                    'email' => $socialUser->getEmail(),
+                    'password' => Hash::make('pasSword123#'),
+                ]
+            );
+            
+            Cart::firstOrCreate(['user_id' => $user->id]);
+
+            $user->providers()->updateOrCreate(
+                [
+                    'provider' => $provider,
+                    'provider_id' => $user->id,
+                ]
+             );
+
+            return $user;
+        });
+        
+        return response()->json([
+            'user' => $user->first_name.' '.$user->last_name,
+            'token' => JWTAuth::fromUser($user),
+            'token_type' => 'bearer',
+        ]);
+      
+    }
   
   
 }
