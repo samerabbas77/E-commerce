@@ -8,13 +8,14 @@ use App\Models\Order\Order;
 use App\Models\Photo\Photo;
 use App\Models\Review\Review;
 use App\Models\Favorite\Favorite;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use  HasFactory, Notifiable,SoftDeletes , HasRoles;//HasApiTokens,
 
@@ -45,6 +46,26 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+     /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey(); // Typically returns the primary key (e.g., 'id').
+    }
+      /**
+     * Return a key-value array containing custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return []; // You can add custom claims here if needed.
+    }
+
 
     /**
      * The attributes that should be cast.
@@ -105,5 +126,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Cart::class);
     }
+
+    //.................
+    //.................
+
+    public function providers()
+{
+    return $this->hasMany(Provider::class);
+}
+
     
     }

@@ -31,12 +31,11 @@ class Controller extends BaseController
      * @param mixed $data
      * @return /Illuminate\Http\JsonResponse
      */
-    protected function error($message = 'Operation Failed', $status = 400, $data =  null)
+    protected function error($message = 'Operation Failed', $status = 400)
     {
         return response()->json([
             'status' => 'error',
-            'message' => $message,
-            'data' => $data
+            'message' => $message
         ], $status);
     }
 
