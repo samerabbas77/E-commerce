@@ -10,6 +10,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+
     /**
      * Return a success JSON Response
      * @param mixed $data
@@ -64,3 +65,4 @@ class Controller extends BaseController
          ], $status);
      }
 }
+
