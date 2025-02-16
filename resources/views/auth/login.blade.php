@@ -43,8 +43,9 @@
             flex: 1;
             background-size: cover;
             background-position: center;
-            z-index: 2;
-            
+            /* z-index: 2; */
+            background-image: url("{{ asset('admin/img/background.jpg') }}");
+
         }
 
         .right {
@@ -136,6 +137,9 @@
                             Forgot Your Password?
                         </a>
                     @endif
+<br>
+<br>
+                    <a href="{{route('register')}}">Create an Account</a>
                 </div>
             </div>
         </div>

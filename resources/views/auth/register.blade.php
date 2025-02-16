@@ -40,7 +40,8 @@
             flex: 1;
             background-image: url("{{ asset('photo5s.jpg') }}");
             background-size: cover;
-            z-index: 2;
+            /* z-index: 2; */
+            background-image: url("{{ asset('admin/img/background.jpg') }}");
         }
 
         .right {
@@ -49,13 +50,14 @@
             justify-content: center;
             align-items: center;
             z-index: 2;
-            background: #fff;
+            /* background: #fff; */
+            background-image: url("{{ asset('admin/img/background.jpg') }}");
         }
 
         .register-container {
             padding: 30px 40px;
             width: 100%;
-            max-width: 400px;
+            max-width: 800px; /* زيادة العرض هنا */
             text-align: center;
             z-index: 3;
         }
@@ -66,14 +68,18 @@
             color: #333;
         }
 
-        .register-container input[type="text"],
-        .register-container input[type="email"],
-        .register-container input[type="password"],
-        .register-container input[type="date"],
-        .register-container select {
-            width: 100%;
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px; /* مسافة بين الحقول */
+            margin-bottom: 15px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 48%; /* تقليص العرض ليكون الحقلين جنب بعض */
             padding: 10px;
-            margin: 5px 0;
+            margin: 0;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 13px;
@@ -114,7 +120,7 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-                    <!-- First Name -->
+                    <!-- First Name and Last Name -->
                     <div class="form-group">
                         <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus placeholder="First Name">
                         @error('first_name')
@@ -122,10 +128,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
 
-                    <!-- Last Name -->
-                    <div class="form-group">
                         <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" placeholder="Last Name">
                         @error('last_name')
                             <span class="invalid-feedback" role="alert">
@@ -144,7 +147,7 @@
                         @enderror
                     </div>
 
-                    <!-- Password -->
+                    <!-- Password and Confirm Password -->
                     <div class="form-group">
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
                         @error('password')
@@ -152,14 +155,11 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
 
-                    <!-- Confirm Password -->
-                    <div class="form-group">
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                     </div>
 
-                    <!-- Phone -->
+                    <!-- Phone and Address -->
                     <div class="form-group">
                         <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone">
                         @error('phone')
@@ -167,10 +167,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
 
-                    <!-- Address -->
-                    <div class="form-group">
                         <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" placeholder="Address">
                         @error('address')
                             <span class="invalid-feedback" role="alert">
@@ -179,7 +176,7 @@
                         @enderror
                     </div>
 
-                    <!-- Gender (is_male) -->
+                    <!-- Gender (is_male) and Birthdate -->
                     <div class="form-group">
                         <select id="is_male" class="form-control @error('is_male') is-invalid @enderror" name="is_male" required>
                             <option value="1" {{ old('is_male') == 1 ? 'selected' : '' }}>Male</option>
@@ -190,10 +187,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
 
-                    <!-- Birthdate -->
-                    <div class="form-group">
                         <input id="birthdate" type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" value="{{ old('birthdate') }}" required>
                         @error('birthdate')
                             <span class="invalid-feedback" role="alert">
@@ -202,7 +196,7 @@
                         @enderror
                     </div>
 
-                    <!-- Telegram User ID -->
+                    <!-- Telegram User ID and Role -->
                     <div class="form-group">
                         <input id="telegram_user_id" type="text" class="form-control @error('telegram_user_id') is-invalid @enderror" name="telegram_user_id" value="{{ old('telegram_user_id') }}" autocomplete="telegram_user_id" placeholder="Telegram User ID">
                         @error('telegram_user_id')
@@ -210,10 +204,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
 
-                    <!-- Role -->
-                    <div class="form-group">
                         <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required>
                             <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                             <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
@@ -232,6 +223,8 @@
                         </button>
                     </div>
                 </form>
+
+                <a href="{{ route('login') }}" style="color: #ff7e5f">already have an account</a>
             </div>
         </div>
     </div>
