@@ -3,7 +3,7 @@
 namespace Database\Seeders\Bundle;
 
 use Carbon\Carbon;
-use App\Models\Bundle\Bundle;
+use App\Models\Api\Bundle\Bundle;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 

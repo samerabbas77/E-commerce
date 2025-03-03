@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\Address;
 
-use App\Models\Address\City;
-use App\Models\Address\Zone;
-use App\Models\Address\Country;
+use App\Models\Api\Address\City;
+use App\Models\Api\Address\Zone;
+use App\Models\Api\Address\Country;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 

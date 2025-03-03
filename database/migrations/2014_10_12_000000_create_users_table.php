@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('birthdate')->nullable();
             $table->string('telegram_user_id')->nullable();
             $table->string('role')->default('customer');
+            $table->json('privacy_settings')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

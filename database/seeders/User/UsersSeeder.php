@@ -3,7 +3,7 @@
 namespace Database\Seeders\User;
 
 use Carbon\Carbon;
-use App\Models\User\User;
+use App\Models\Api\User\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,7 +22,7 @@ class UsersSeeder extends Seeder
                 'last_name' => 'admin',
                 'email' => 'admin@example.com',
                 'password' => Hash::make('pasSword123#'),
-                'phone' => '0912345678',
+                'phone' => '+963994709645',
                 'address' => '123 Main St',
                 'is_male' => true,
                 'birthdate' => Carbon::create('1990', '05', '20'),

@@ -5,27 +5,28 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\Cart\CartSeeder;
 use Database\Seeders\User\UsersSeeder;
 use Database\Seeders\Order\OrderSeeder;
 use Database\Seeders\Photo\PhotoSeeder;
 use Database\Seeders\Bundle\BundleSeeder;
+use Database\Seeders\Cart\CartItemSeeder;
+use Database\Seeders\Coupon\CouponSeeder;
 use Database\Seeders\Refund\RefundSeeder;
 use Database\Seeders\Review\ReviewSeeder;
 use Database\Seeders\Address\AddressSeeder;
 use Database\Seeders\Product\ProductSeeder;
+use Database\Seeders\Role\PermissionSeeder;
+use Spatie\Permission\Contracts\Permission;
 use Database\Seeders\Favorite\FavoriteSeeder;
 use Database\Seeders\Refund\RefundItemSeeder;
+use Database\Seeders\Coupon\CouponOrderSeeder;
 use Database\Seeders\Order\OrderProductSeeder;
+use Database\Seeders\User\UserOtpSettingSeeder;
 use Database\Seeders\Bundle\BundleProductSeeder;
-use Database\Seeders\Cart\CartItemSeeder;
-use Database\Seeders\Cart\CartSeeder;
 use Database\Seeders\Category\SubCategorySeeder;
 use Database\Seeders\Category\MainCategoriesSeeder;
 use Database\Seeders\Category\MainCategorySubcategorySeeder;
-use Database\Seeders\Coupon\CouponOrderSeeder;
-use Database\Seeders\Coupon\CouponSeeder;
-use Database\Seeders\Role\PermissionSeeder;
-use Spatie\Permission\Contracts\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -56,6 +57,7 @@ class DatabaseSeeder extends Seeder
          CouponSeeder::class,
          CouponOrderSeeder::class,
          PermissionSeeder::class,
+         UserOtpSettingSeeder::class,
         ]);
     }
 }

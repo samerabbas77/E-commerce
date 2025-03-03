@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\Favorite;
 
-use App\Models\Bundle\Bundle;
-use App\Models\Favorite\Favorite;
-use App\Models\Product\Product;
+use App\Models\Api\Bundle\Bundle;
+use App\Models\Api\Favorite\Favorite;
+use App\Models\Api\Product\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

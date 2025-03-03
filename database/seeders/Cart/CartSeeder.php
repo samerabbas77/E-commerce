@@ -3,7 +3,7 @@
 namespace Database\Seeders\Cart;
 
 use Carbon\Carbon;
-use App\Models\Cart\Cart;
+use App\Models\Api\Cart\Cart;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
