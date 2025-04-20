@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Refund;
 
-use App\Models\Refund\Refund;
+use App\Models\Api\Refund\Refund;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;

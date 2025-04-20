@@ -19,11 +19,12 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->nullable();
-            $table->string('address');
-            $table->boolean('is_male');
-            $table->date('birthdate');
+            $table->string('address')->nullable();
+            $table->boolean('is_male')->default(0);
+            $table->date('birthdate')->nullable();
             $table->string('telegram_user_id')->nullable();
             $table->string('role')->default('customer');
+            $table->json('privacy_settings')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

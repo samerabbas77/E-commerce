@@ -3,7 +3,7 @@
 namespace Database\Seeders\Order;
 
 use Illuminate\Database\Seeder;
-use App\Models\Order\OrderProduct;
+use App\Models\Api\Order\OrderProduct;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class OrderProductSeeder extends Seeder

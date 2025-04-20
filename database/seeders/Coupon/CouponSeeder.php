@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Coupon;
 
-use App\Models\Coupon\Coupon;
+use App\Models\Api\Coupon\Coupon;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
