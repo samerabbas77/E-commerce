@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Category;
 
-use App\Models\Category\SubCategory;
+use App\Models\Api\Category\SubCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

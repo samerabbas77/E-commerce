@@ -37,16 +37,12 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
-    'facebook' => [
-        'client_id' => env('FACEBOOK_CLIENT_ID'),
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => env('FACEBOOK_REDIRECT'),
-    ],
 
-    'linkedin' => [
-        'client_id' => env('LINKEDIN_CLIENT_ID'),
-        'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
-        'redirect' => env('LINKEDIN_REDIRECT'),
+    //Authentication services for  Twilio Credentials (senfd sms by twillo for 2-step auth)
+    'twilio' => [
+        'sid' => env('TWILIO_SID'),
+        'auth_token' => env('TWILIO_AUTH_TOKEN'),
+        'phone_number' => env('TWILIO_PHONE_NUMBER'),
     ],
 
 ];

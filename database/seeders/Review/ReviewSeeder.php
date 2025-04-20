@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\Review;
 
-use App\Models\Bundle\Bundle;
-use App\Models\Product\Product;
-use App\Models\Review\Review;
+use App\Models\Api\Bundle\Bundle;
+use App\Models\Api\Product\Product;
+use App\Models\Api\Review\Review;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

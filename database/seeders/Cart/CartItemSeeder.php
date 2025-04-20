@@ -2,8 +2,8 @@
 
 namespace Database\Seeders\Cart;
 
-use App\Models\Cart\Cart;
-use App\Models\Cart\CartItem;
+use App\Models\Api\Cart\Cart;
+use App\Models\Api\Cart\CartItem;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
