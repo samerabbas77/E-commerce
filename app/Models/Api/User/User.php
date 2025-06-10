@@ -34,7 +34,6 @@ class User extends Authenticatable implements JWTSubject
         'is_male',
         'birthdate',
         'telegram_user_id',
-        'privacy_settings',
     ];
 
     protected $guard = ['role','phone','privacy_settings'];
