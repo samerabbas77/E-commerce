@@ -30,13 +30,13 @@ class TwoStepController extends Controller
 public function changeUserOtpSetting(User $user)
 {
     $result = $this->verificationCodeService->changeUserOtpSetting($user);
-
+    
     if($result)
     {
-        return $this->success(null, 'User otp  is Enable', 200);
+        return $this->success(null, 'User otp  is Changed To : '. ($user->otpSetting->is_enabled ? 'Enabled' : 'Disabled') , 200);
     }
 
-    return $this->success(null, 'User otp  is Disable', 200);
+    return $this->error('User Not Allowed to do this', 400);
 }
 
 //...........................................................

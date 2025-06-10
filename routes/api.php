@@ -2,9 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Api\User\Auth\AuthController;
-use App\Http\Controllers\Api\User\Auth\OauthController;
 
+use App\Http\Controllers\Api\User\Auth\OauthController;
 use App\Http\Controllers\Api\User\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\User\Two_Step_Authentication\TwoStepController;
 use App\Http\Controllers\Api\User\Two_Step_Authentication\TelegramController;
@@ -65,7 +66,13 @@ Route::middleware('throttle:10,1')->group(function () {
         Route::post('/verfiy','verifyOtp');
 
     });
+
+   //...........User.............
+   Route::controller(UserController::class)->middleware('auth:api')->group(function () {
+       Route::post('/user/privacy','updatePrivacySetting');
+   });
     
 });
+
 
 
