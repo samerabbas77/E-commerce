@@ -19,8 +19,8 @@ class OauthController extends Controller
     //...................................................................................................
         /**
      * Redirect to the OAuth provider for login 
-     * (if the procees is currect it will direct you to google or facebook or linkedin)
-     * depende on what provider you sit in the request
+     * (if the procees is currect it will direct you to google )
+     * 
      *
      * @param string $provider
      * @return mixed

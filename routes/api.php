@@ -2,9 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Api\User\Auth\AuthController;
-use App\Http\Controllers\Api\User\Auth\OauthController;
 
+use App\Http\Controllers\Api\User\Auth\OauthController;
 use App\Http\Controllers\Api\User\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\User\Two_Step_Authentication\TwoStepController;
 use App\Http\Controllers\Api\User\Two_Step_Authentication\TelegramController;
@@ -56,7 +57,7 @@ Route::middleware('throttle:10,1')->group(function () {
     //.......... Two-step authenticaion via Telegram and SMS
     Route::controller(TwoStepController::class)->group(function () {
         //Aplly Two-step Authentecation
-        Route::post('/changeUserOtpSetting/{user}','changeUserOtpSetting');
+        Route::post('/changeUserOtpSetting/{user}','changeUserOtpSetting')->middleware('auth:api');
         
         //Send Otp code dependce on the provider that choosen by user
         Route::post('/sendOtpCode','sendOtpCode');
@@ -65,7 +66,18 @@ Route::middleware('throttle:10,1')->group(function () {
         Route::post('/verfiy','verifyOtp');
 
     });
+
+   //...........User.............
+   Route::controller(UserController::class)->middleware('auth:api')->group(function () {
+       Route::post('/user/privacy','updatePrivacySetting');
+   });
     
 });
+
+// Route::controller(TwoStepController::class)->group(function()
+// {
+//     Route::post('/sverfiy','verifyOtp');
+// });
+
 
 

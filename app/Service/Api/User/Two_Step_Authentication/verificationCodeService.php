@@ -21,14 +21,18 @@ class VerificationCodeService
     public function changeUserOtpSetting($user)
     {
       try {
+    
+        if(($user->role != 'Admin') && ($user->id != auth('api')->user()->id))
+        {
+            return false;
+        }
 
           $user->otpSetting->update([
               'is_enabled' => !$user->otpSetting->is_enabled,
           ]);
           
-          if($user->otpSetting->is_enabled) return true;
-
-          return false;
+        return true;
+     
       } catch (Exception $e) {
           Log::error('Error while change otp setting: ' . $e->getMessage());
           throw new Exception('Failed in the server: ' . $e->getMessage());
@@ -74,7 +78,12 @@ class VerificationCodeService
       //...........................................
       //...........................................
       
-
+    /**
+     * Summary of sendOtpCode
+     * @param mixed $data
+     * @throws \Exception
+     * @return array
+     */
     public function sendOtpCode($data)
     {
         try {
