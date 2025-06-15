@@ -36,26 +36,25 @@ public function register(RegisterRequest $request)
 //.................................
 //.................................
 
-/**
-* Get a JWT via given credentials.
-*
-* @param LoginRequest $request
-* @return JsonResponse
-*/
-  public function login(LoginRequest $request): JsonResponse
+  /**
+   * Get a JWT via given credentials.
+   * @param \App\Http\Requests\Api\User\Auth\LoginRequest $request
+   * @return mixed|\Illuminate\Http\JsonResponse
+   */
+  public function login(LoginRequest $request)
   {
     $response = $this->authService->login($request->validated());
-
+  
     // Handle unauthorized response
     if (!$response) 
     {
-      return response()->json(['error' => 'Unauthorized'], 401);
+      return $this->error('Unauthorized', 401);
     }
 
     // Check if two-step authentication is required
     if ($response['Two-Step']) 
     {
-      return $this->success(['Two-Step' => true,'otp_token'=>$response['otp_token']], $response['message'], 200);
+      return $this->success( ['Two-Step' =>$response['Two-Step'],'otp_token' => $response['otp_token']], $response['message'], 200);
     }
 
     // Normal login response

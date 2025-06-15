@@ -57,7 +57,7 @@ Route::middleware('throttle:10,1')->group(function () {
     //.......... Two-step authenticaion via Telegram and SMS
     Route::controller(TwoStepController::class)->group(function () {
         //Aplly Two-step Authentecation
-        Route::post('/changeUserOtpSetting/{user}','changeUserOtpSetting');
+        Route::post('/changeUserOtpSetting/{user}','changeUserOtpSetting')->middleware('auth:api');
         
         //Send Otp code dependce on the provider that choosen by user
         Route::post('/sendOtpCode','sendOtpCode');
@@ -73,6 +73,11 @@ Route::middleware('throttle:10,1')->group(function () {
    });
     
 });
+
+// Route::controller(TwoStepController::class)->group(function()
+// {
+//     Route::post('/sverfiy','verifyOtp');
+// });
 
 
 
