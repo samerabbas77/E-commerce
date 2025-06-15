@@ -3,7 +3,9 @@
 namespace App\Exceptions;
 
 use Throwable;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Database\QueryException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -81,8 +83,15 @@ class Handler extends ExceptionHandler
             ], 422);
         }
 
+        if ($exception instanceof AuthenticationException) {
+            return response()->json([
+                'status' =>false,
+                'message' =>'Unauthenticated'
+            ]);
+        }
+
         //...................................
-        return response()->json(['message' => 'something went wronge : '.$exception->getMessage()], 404);
+        return response()->json(['message' => 'something went wronge : '.$exception], 404);
     
         
     }

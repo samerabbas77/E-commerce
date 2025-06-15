@@ -66,7 +66,7 @@ public function sendOtpCode(SendOtpCodeRequest $request)
 
     if($response['status'] == false) 
     {
-       return $this->error($response['message'], 400); 
+       return $this->error((string)$response['message'], 400); 
     }
     return $this->success($response, 'User login successfully', 200);
 }

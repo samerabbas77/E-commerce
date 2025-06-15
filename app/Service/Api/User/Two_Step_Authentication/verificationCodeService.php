@@ -78,7 +78,12 @@ class VerificationCodeService
       //...........................................
       //...........................................
       
-
+    /**
+     * Summary of sendOtpCode
+     * @param mixed $data
+     * @throws \Exception
+     * @return array
+     */
     public function sendOtpCode($data)
     {
         try {
