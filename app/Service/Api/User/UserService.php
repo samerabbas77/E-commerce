@@ -2,6 +2,7 @@
 namespace App\Service\Api\User;
 
 use Exception;
+use App\Models\Api\User\User;
 use Illuminate\Support\Facades\Log;
 
 class UserService
@@ -19,8 +20,13 @@ class UserService
 
             $user = auth('api')->user();
 
-            $user->privacySetting = $data['privacy_setting'];
-            
+            $user = User::findOrFail($user->id);
+
+            $user->privacy_setting = $data['privacy_setting'];
+           
+            $user->save();
+     
+
         } catch (Exception $e) {
             Log::error('Error while update privacy array for a user: ' . $e->getMessage());
             throw new Exception('Failed in the server: ' . $e->getMessage());

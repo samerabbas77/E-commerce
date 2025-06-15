@@ -36,7 +36,7 @@ class User extends Authenticatable implements JWTSubject
         'telegram_user_id',
     ];
 
-    protected $guard = ['role','phone','privacy_settings'];
+    protected $guard = ['role','phone','privacy_setting'];
 
     /**
      * The attributes that should be hidden for serialization.

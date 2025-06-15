@@ -23,10 +23,8 @@ class UpdatePrivecySettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'privacy_setting'  =>['required','array','in:phone,address,birthdate'],
-            'privacy_settings.phone' => 'boolean',
-            'privacy_settings.address' => 'boolean',
-            'privacy_setting.birthdate' => 'boolean'
+            'privacy_setting'  =>['required','array'],
+            'privacy_setting.*' => ['boolean'], // allows both bool and integer representations
         ];
     }
 }
