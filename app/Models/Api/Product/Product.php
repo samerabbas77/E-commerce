@@ -14,6 +14,7 @@ use App\Models\Api\Category\MainCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Api\Category\MainCategorySubcategory;
+use App\Models\Api\Warehouse\Warehouse;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
@@ -157,5 +158,20 @@ public function subCategory()
         return $this->morphMany(Review::class,'photoable');
     }
 
+    //...............
+    //...............
+
+      /**
+     *  mony To Many Relation (products could be in many warehouses and each warehouse have many products)
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function warehouses()
+    {
+        return $this->belongsToMany(Warehouse::class,'warehouse_products','product_id','warehouse_id')
+                     ->withPivot('stack', 'last_updated')
+                     ->withTimestamps();
+    }
+        
 
 }

@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\Cart\CartSeeder;
 use Database\Seeders\User\UsersSeeder;
+use App\Models\Api\Warehouse\Warehouse;
 use Database\Seeders\Order\OrderSeeder;
 use Database\Seeders\Photo\PhotoSeeder;
 use Database\Seeders\Bundle\BundleSeeder;
@@ -22,10 +23,13 @@ use Database\Seeders\Favorite\FavoriteSeeder;
 use Database\Seeders\Refund\RefundItemSeeder;
 use Database\Seeders\Coupon\CouponOrderSeeder;
 use Database\Seeders\Order\OrderProductSeeder;
+use App\Models\Api\Warehouse\Warehouse_product;
 use Database\Seeders\User\UserOtpSettingSeeder;
+use Database\Seeders\Warehouse\WarehouseSeeder;
 use Database\Seeders\Bundle\BundleProductSeeder;
 use Database\Seeders\Category\SubCategorySeeder;
 use Database\Seeders\Category\MainCategoriesSeeder;
+use Database\Seeders\Warehouse\WarehouseProductSeeder;
 use Database\Seeders\Category\MainCategorySubcategorySeeder;
 
 class DatabaseSeeder extends Seeder
@@ -58,6 +62,8 @@ class DatabaseSeeder extends Seeder
          CouponOrderSeeder::class,
          PermissionSeeder::class,
          UserOtpSettingSeeder::class,
+         WarehouseSeeder::class,
+         WarehouseProductSeeder::class
         ]);
     }
 }
