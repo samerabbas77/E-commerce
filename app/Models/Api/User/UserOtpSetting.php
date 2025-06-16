@@ -12,6 +12,11 @@ class UserOtpSetting extends Model
 
     protected $fillable = ['user_id', 'is_enabled','provider','expired_at','last_verified_at'];
 
+
+    /**
+     * one To One Relation
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);

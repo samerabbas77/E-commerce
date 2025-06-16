@@ -144,6 +144,7 @@ class User extends Authenticatable implements JWTSubject
     //...................
     /**
      * telegram dual authentication
+     * one To One Relation
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function otpSetting()
