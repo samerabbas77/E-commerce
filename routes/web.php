@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Captcha\SecurityCheckController;
 use App\Http\Controllers\Admin\Category\MainCategoryController;
 
 /*
@@ -17,15 +20,36 @@ use App\Http\Controllers\Admin\Category\MainCategoryController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect()->route('security.check');
 });
 
-Auth::routes();
+// صفحة تسجيل الدخول (إذا تجاوز التحقق)
+Route::controller(LoginController::class)->middleware('throttle:5,1')->group(function () {
+  Route::get('/login', 'showLoginForm')->name('page-login');
+  Route::post('/login', 'login')->name('login');
+  
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes([
+    'register' => false,
+    'login' => false
+]);
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 
 Route::middleware(['auth:web', 'role:Admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('main_categories', MainCategoryController::class);
 });
+
+// Recaptcha by goog reCAPTCHA
+Route::controller(SecurityCheckController::class)->group(function () {
+   Route::get('/security-check', 'showCaptcha')->name('security.check');
+   Route::post('/security-check', 'verifyCaptcha')->name('security.check.verify'); 
+});
+
+
+
+

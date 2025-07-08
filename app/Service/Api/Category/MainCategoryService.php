@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\Api\Category;
+namespace App\Service\Api\Category;
 
 use App\Models\Api\Category\MainCategory;
 use Illuminate\Database\Eloquent\Collection;

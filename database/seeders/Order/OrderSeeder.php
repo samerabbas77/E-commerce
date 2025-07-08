@@ -105,45 +105,9 @@ class OrderSeeder extends Seeder
                 'zone_id' => 1,
                 'user_id' => 7,
             ],
-            [
-                'total_price' => 350,
-                'discount' => 25,
-                'final_price' => 325,
-                'status' => 'shipped',
-                'order_number' => 'ORD-1008',
-                'payment_status' => 'Completed',
-                'payment_method' => 'Strip',
-                'transaction_id' => 'TXN123461',
-                'postal_code' => '66666',
-                'zone_id' => 2,
-                'user_id' => 8,
-            ],
-            [
-                'total_price' => 280,
-                'discount' => 20,
-                'final_price' => 260,
-                'status' => 'delivered',
-                'order_number' => 'ORD-1009',
-                'payment_status' => 'Completed',
-                'payment_method' => 'PayPal',
-                'transaction_id' => 'TXN123462',
-                'postal_code' => '77777',
-                'zone_id' => 3,
-                'user_id' => 9,
-            ],
-            [
-                'total_price' => 100,
-                'discount' => 5,
-                'final_price' => 95,
-                'status' => 'canceled',
-                'order_number' => 'ORD-1010',
-                'payment_status' => 'Refunded',
-                'payment_method' => 'Credit Card',
-                'transaction_id' => 'TXN123463',
-                'postal_code' => '88888',
-                'zone_id' => 1,
-                'user_id' => 10,
-            ],
+
+        
+          
         ];
 
         foreach ($orders as $order) {

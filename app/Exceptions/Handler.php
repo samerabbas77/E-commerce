@@ -55,11 +55,11 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
 
-        if ($exception instanceof QueryException) {
+        if ($exception instanceof QueryException && !$request->expectsJson()) {
             return response()->json(['message' => 'Database Error'], 500);
         }
 
-         if ($exception instanceof ModelNotFoundException) {
+         if ($exception instanceof ModelNotFoundException && !$request->expectsJson()) {
             return response()->json([
                 'status' => false,
                 'message' => 'Resource not found',
@@ -67,7 +67,7 @@ class Handler extends ExceptionHandler
         }
 
 
-        if ($exception instanceof AuthorizationException) {
+        if ($exception instanceof AuthorizationException && $request->expectsJson()) {
             return response()->json([
                 'status' => false,
                 'message' => 'Unauthorized action',
@@ -75,7 +75,7 @@ class Handler extends ExceptionHandler
         }
 
 
-        if ($exception instanceof ValidationException) {
+        if ($exception instanceof ValidationException && $request->expectsJson()) {
             return response()->json([
                 'status' => false,
                 'errors' => $exception->errors(),
@@ -83,7 +83,7 @@ class Handler extends ExceptionHandler
             ], 422);
         }
 
-        if ($exception instanceof AuthenticationException) {
+        if ($exception instanceof AuthenticationException && $request->expectsJson()) {
             return response()->json([
                 'status' =>false,
                 'message' =>'Unauthenticated'
@@ -91,8 +91,21 @@ class Handler extends ExceptionHandler
         }
 
         //...................................
-        return response()->json(['message' => 'something went wronge : '.$exception], 404);
-    
+        if ($request->expectsJson())
+        {
+            return response()->json(['message' => 'something went wronge : '.$exception], 404);
+        }else{
+               // ✅ تأكد إنو الطلب مو AJAX ولا JSON:
+                if ($exception instanceof ValidationException && ! $request->expectsJson()) {
+                    return redirect()->back()
+                        ->withInput($request->input())
+                        ->withErrors($exception->validator);
+                }
+
+                // أي استثناءات ثانية، خليه يرجع نفس الرسالة المخصصة
+                return parent::render($request, $exception);
+        }
+        
         
     }
 }
