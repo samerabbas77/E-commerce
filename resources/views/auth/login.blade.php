@@ -140,7 +140,7 @@
 <br>
 <br>
                                     {{-- <a href="{{route('register')}}">Create an Account</a> --}}
-                                                        @if ($errors->any())
+            @if ($errors->any())
                 <div style="color: #856404; margin-bottom: 15px; border: 1px solid #ffeeba; padding: 10px; border-radius: 5px; background-color: #fff3cd;">
                     <ul>
                         @foreach ($errors->all() as $error)

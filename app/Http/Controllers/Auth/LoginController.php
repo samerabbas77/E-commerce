@@ -57,4 +57,14 @@ class LoginController extends Controller
             'login' => 'The provided credentials is Wrong ',
         ])->onlyInput('email');
     }
+
+
+    public function showLoginForm()
+{
+    if (!session('passed_captcha')) {
+        return redirect()->route('security.check');
+    }
+
+    return view('auth.login');
+}
 }

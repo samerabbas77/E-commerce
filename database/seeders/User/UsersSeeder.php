@@ -23,7 +23,7 @@ class UsersSeeder extends Seeder
                 'first_name' => 'admin',
                 'last_name' => 'admin',
                 'email' => 'admin@gmail.com',
-                'password' => Hash::make('pasSword123#'),
+                'password' => Hash::make('123456789'),
                 'phone' => '+963994709645',
                 'address' => '123 Main St',
                 'is_male' => true,
